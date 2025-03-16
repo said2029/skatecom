@@ -1,24 +1,81 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-bowlby-sc);
+  --font-mono: var(--font-dM-Mono);
+  --color-brand-blue: #4876ff;
+  --color-brand-lime: #d9f154;
+  --color-brand-navy: #2e3192;
+  --color-brand-orange: #ff7347;
+  --color-brand-pink: #f7d0e9;
+  --color-brand-purple: #692e54;
+  --color-brand-gray: #fffdf9;
+  --animate-squiggle: squiggle 0.5s infinite;
 }
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes squiggle {
+  0% {
+    filter: url("#squiggle-0");
+  }
+  25% {
+    filter: url("#squiggle-1");
+  }
+  60% {
+    filter: url("#squiggle-2");
+  }
+  75% {
+    filter: url("#squiggle-3");
+  }
+  100% {
+    filter: url("#squiggle-4");
   }
 }
+.bg-texture{
+  background-image: url("/bg-texture.webp");
+  background-size: 720px 400px;
+  background-repeat: repeat;
+  background-position: center;
+}
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.button-cutout {
+  position: relative;
+  filter: drop-shadow(0 1px 0 #000) drop-shadow(-1px 0 0 #000)
+    drop-shadow(1px 0 0 #000) drop-shadow(0 -1px 0 #000)
+    drop-shadow(8px 8px 0 #000);
+
+  &:hover {
+    filter: drop-shadow(0 1px 0 #000) drop-shadow(-1px 0 0 #000)
+      drop-shadow(1px 0 0 #000) drop-shadow(0 -1px 0 #000)
+      drop-shadow(2px 2px 0 #000);
+  }
+
+  &::before {
+    position: absolute;
+    top: 0;
+    right: calc(100% - 1px);
+    content: "";
+    background: inherit;
+    width: 1rem;
+    height: 100%;
+    clip-path: polygon(0 62%, 61% 45%, 0 28%, 0 0, 100% 0, 100% 100%, 0 100%)
+  }
+
+  &::after {
+    position: absolute;
+    top: 0;
+    left: calc(100% - 1px);
+    content: "";
+    background: inherit;
+    width: 1rem;
+    height: 100%;
+    clip-path: polygon(
+      100% 0,
+      74% 28%,
+      100% 29%,
+      100% 70%,
+      84% 78%,
+      100% 100%,
+      0 100%,
+      0 0
+    );
+  }
 }
