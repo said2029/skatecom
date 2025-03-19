@@ -32,7 +32,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
         <WideLogo className="w-full hidden lg:block" />
       </div>
       <div className="absolute max-w-6xl mt-24 grid inset-0 mx-auto grid-rows-[1fr,auto] place-items-end px-6 p-11">
-        <Heading className="text-6xl font-extrabold relative max-w-2xl place-self-start">
+        <Heading  className="text-6xl font-extrabold relative max-w-2xl place-self-start">
           <PrismicText field={slice.primary.heading} />
         </Heading>
         <div className="flex w-full justify-between">

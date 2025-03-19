@@ -1,13 +1,13 @@
+import clsx from "clsx";
 import { SVGProps } from "react";
 
 export function WideLogo({ className, ...props }: SVGProps<SVGSVGElement>) {
-
   return (
     <svg
+      className={clsx(className, "animate-squiggle")}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 1440 553"
-      className={className}
       {...props}
     >
       <path
