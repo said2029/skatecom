@@ -16,7 +16,7 @@ export default function Bounded({
   return (
     <Com
       className={clsx(
-        "px-6 [.header+&]:-pt-44 [.header+&]:md:pt-32",
+        "px-6 p-8 [.header+&]:-pt-44 [.header+&]:md:pt-32",
         className
       )}
       {...reastProps}
