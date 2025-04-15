@@ -1,0 +1,58 @@
+{
+  "format": "custom",
+  "id": "skater",
+  "label": "skater",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "first_name": {
+        "type": "Text",
+        "config": {
+          "label": "First Name",
+          "placeholder": ""
+        }
+      },
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "UID"
+        }
+      },
+      "last_name": {
+        "type": "Text",
+        "config": {
+          "label": "Last name",
+          "placeholder": ""
+        }
+      },
+      "image_background": {
+        "type": "Image",
+        "config": {
+          "label": "image Background",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "image_forground": {
+        "type": "Image",
+        "config": {
+          "label": "Image Forground",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "customizer": {
+        "type": "Link",
+        "config": {
+          "label": "Customizer",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": false
+        }
+      }
+    }
+  }
+}

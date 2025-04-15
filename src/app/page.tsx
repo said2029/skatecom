@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import { isFilled, asImageSrc } from "@prismicio/client";
-import { SliceZone } from "@prismicio/react";
+import { isFilled, asImageSrc, Content } from "@prismicio/client";
+import { SliceComponentProps, SliceZone } from "@prismicio/react";
 
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
@@ -8,8 +8,23 @@ import { components } from "@/slices";
 export default async function Page() {
   const client = createClient();
   const page = await client.getSingle("homepage");
-
-  return <SliceZone slices={page.data.slices} components={components} />;
+  const slices = bundleTextAndImageSlices(page.data.slices);
+console.log(slices);
+  return (
+    <SliceZone
+      slices={slices}
+      components={{
+        ...components,
+        text_and_image: ({ slice }: SliceComponentProps<TextAndImageBundleSlice>) => {
+          return (
+            <div>
+              <SliceZone slices={slice.slices} components={components} />
+            </div>
+          );
+        },
+      }}
+    />
+  );
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -31,4 +46,40 @@ export async function generateMetadata(): Promise<Metadata> {
         : undefined,
     },
   };
+}
+
+type TextAndImageBundleSlice = {
+  id: string;
+  slice_type: "text_and_image";
+  slices: Content.TextAndImageSlice[];
+};
+
+function bundleTextAndImageSlices(
+  slices: Content.HomepageDocumentDataSlicesSlice[]
+) {
+  const res: (
+    | Content.HomepageDocumentDataSlicesSlice
+    | TextAndImageBundleSlice
+  )[] = [];
+
+  for (const slice of slices) {
+    if (slice.slice_type !== "text_and_image") {
+      res.push(slice);
+      continue;
+    }
+
+    const bundle = res.at(-1);
+    if (bundle?.slice_type === "text_and_image" && "slices" in bundle) {
+      bundle.slices.push(slice);
+    } else {
+      res.push({
+        id: `${slice.id}-bundle`,
+        slice_type: "text_and_image",
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        slices: [slice as any],
+        primary: slice?.primary,
+      });
+    }
+  }
+  return res;
 }

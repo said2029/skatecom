@@ -47,6 +47,31 @@
             }
           }
         }
+      },
+      "footerbackground": {
+        "type": "Image",
+        "config": {
+          "label": "footerBackground",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "skateboards": {
+        "type": "Group",
+        "config": {
+          "label": "skateboards",
+          "repeat": true,
+          "fields": {
+            "skateboard": {
+              "type": "Image",
+              "config": {
+                "label": "skateboard",
+                "constraint": {},
+                "thumbnails": []
+              }
+            }
+          }
+        }
       }
     }
   }
