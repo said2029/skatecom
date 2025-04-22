@@ -12,9 +12,10 @@ export async function Footer() {
   const footerBoards = setting.data.skateboards
     .map((item) => asImageSrc(item.skateboard, { h: 600 }))
     ?.filter((url): url is string => Boolean(url));
+
   return (
     <footer className="bg-texture bg-zinc-900 text-white overflow-hidden">
-      <div className="relative h-[75vh] p-10 ">
+      <div className="relative h-[75vh] p-10">
         <PrismicNextImage
           fill
           className="object-cover"
@@ -22,7 +23,10 @@ export async function Footer() {
           alt=""
           field={setting.data.footerbackground}
         />
-        <FooterPhysics boardTextureURLs={footerBoards} className="absolute z-50 inset-0"/>
+        <FooterPhysics
+          boardTextureURLs={footerBoards}
+          className="absolute h-full z-50 inset-0"
+        />
         <Logo className="relative h-20 pointer-events-none mix-blend-exclusion md:h-28" />
       </div>
 

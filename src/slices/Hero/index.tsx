@@ -11,6 +11,7 @@ import { ButtonLink } from "@/components/ButtonLink";
 import { Heading } from "@/components/heading";
 import { TallLogo } from "./components/TallLogo";
 import { WideLogo } from "./components/WideLogo";
+import InteractiveSkateboard from "./components/InteractiveSkateboard";
 
 /**
  * Props for `Hero`.
@@ -48,6 +49,9 @@ const Hero: FC<HeroProps> = ({ slice }) => {
           {/* <PrismicNextLink field={slice.primary.button} /> */}
         </div>
       </div>
+
+      <InteractiveSkateboard/>
+      
     </Bounded>
   );
 };

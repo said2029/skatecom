@@ -9,7 +9,6 @@ export default async function Page() {
   const client = createClient();
   const page = await client.getSingle("homepage");
   const slices = bundleTextAndImageSlices(page.data.slices);
-console.log(slices);
   return (
     <SliceZone
       slices={slices}
@@ -54,6 +53,7 @@ type TextAndImageBundleSlice = {
   slices: Content.TextAndImageSlice[];
 };
 
+// halper
 function bundleTextAndImageSlices(
   slices: Content.HomepageDocumentDataSlicesSlice[]
 ) {
