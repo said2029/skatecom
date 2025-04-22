@@ -45,9 +45,63 @@ export function Skateboard(props: SkateboardProps) {
       gripeTapeRoughness.wrapT = THREE.RepeatWrapping;
       gripeTapeRoughness.repeat.set(9, 9);
       gripeTapeRoughness.needsUpdate = true;
+
+      gripeTapeRoughness.anisotropy = 8;
     }
     return material;
   }, [gripeTapeDiffuse, gripeTapeRoughness]);
+
+  const BoltColor = "#555555";
+
+  const boltMaterial = useMemo(
+    () =>
+      new THREE.MeshStandardMaterial({
+        color: BoltColor,
+        metalness: 0.5,
+        roughness: 0.2,
+      }),
+    [BoltColor]
+  );
+
+  const metalMaterial = useTexture("/skateboard/metal-normal.avif");
+  metalMaterial.wrapS = THREE.RepeatWrapping;
+  metalMaterial.wrapT = THREE.RepeatWrapping;
+  metalMaterial.anisotropy = 8;
+  metalMaterial.repeat.set(8, 8);
+
+  const TruckMaterial = useMemo(
+    () =>
+      new THREE.MeshStandardMaterial({
+        color: BoltColor,
+        normalMap: metalMaterial,
+        normalScale: new THREE.Vector2(0.3, 0.3),
+        metalness: 0.8,
+        roughness: 0.2,
+      }),
+    [BoltColor, metalMaterial]
+  );
+
+  const DeckTexture = useTexture("/skateboard/Deck.webp");
+  const DeckMaterial = useMemo(
+    () =>
+      new THREE.MeshStandardMaterial({
+        map: DeckTexture,
+        roughness: 0.4,
+      }),
+    [DeckTexture]
+  );
+  
+  const WheelTexture = useTexture("/skateboard/SkateWheel1.png");
+  WheelTexture.flipY=false;
+  const WheelMaterial = useMemo(
+    () =>
+      new THREE.MeshStandardMaterial({
+        map: WheelTexture,
+        roughness: 0.35,
+      }),
+    [WheelTexture]
+  );
+
   return (
     <group {...props} dispose={null}>
       <group name="Scene">
@@ -64,7 +118,7 @@ export function Skateboard(props: SkateboardProps) {
           castShadow
           receiveShadow
           geometry={nodes.Wheel1.geometry}
-          material={nodes.Wheel1.material}
+          material={WheelMaterial}
           position={[0.238, 0.086, 0.635]}
         />
         <mesh
@@ -72,7 +126,7 @@ export function Skateboard(props: SkateboardProps) {
           castShadow
           receiveShadow
           geometry={nodes.Wheel2.geometry}
-          material={nodes.Wheel2.material}
+          material={WheelMaterial}
           position={[-0.237, 0.086, 0.635]}
         />
         <mesh
@@ -80,7 +134,7 @@ export function Skateboard(props: SkateboardProps) {
           castShadow
           receiveShadow
           geometry={nodes.Deck.geometry}
-          material={nodes.Deck.material}
+          material={DeckMaterial}
           position={[0, 0.271, -0.002]}
         />
         <mesh
@@ -88,7 +142,7 @@ export function Skateboard(props: SkateboardProps) {
           castShadow
           receiveShadow
           geometry={nodes.Wheel4.geometry}
-          material={nodes.Wheel4.material}
+          material={WheelMaterial}
           position={[-0.238, 0.086, -0.635]}
           rotation={[Math.PI, 0, Math.PI]}
         />
@@ -97,7 +151,7 @@ export function Skateboard(props: SkateboardProps) {
           castShadow
           receiveShadow
           geometry={nodes.Bolts.geometry}
-          material={nodes.Bolts.material}
+          material={boltMaterial}
           position={[0, 0.198, 0]}
           rotation={[Math.PI, 0, Math.PI]}
         />
@@ -106,7 +160,7 @@ export function Skateboard(props: SkateboardProps) {
           castShadow
           receiveShadow
           geometry={nodes.Wheel3.geometry}
-          material={nodes.Wheel3.material}
+          material={WheelMaterial}
           position={[0.237, 0.086, -0.635]}
           rotation={[Math.PI, 0, Math.PI]}
         />
@@ -115,7 +169,7 @@ export function Skateboard(props: SkateboardProps) {
           castShadow
           receiveShadow
           geometry={nodes.Baseplates.geometry}
-          material={nodes.Baseplates.material}
+          material={boltMaterial}
           position={[0, 0.211, 0]}
         />
         <mesh
@@ -123,7 +177,7 @@ export function Skateboard(props: SkateboardProps) {
           castShadow
           receiveShadow
           geometry={nodes.Truck1.geometry}
-          material={nodes.Truck1.material}
+          material={TruckMaterial}
           position={[0, 0.101, -0.617]}
         />
         <mesh
@@ -131,7 +185,7 @@ export function Skateboard(props: SkateboardProps) {
           castShadow
           receiveShadow
           geometry={nodes.Truck2.geometry}
-          material={nodes.Truck2.material}
+          material={TruckMaterial}
           position={[0, 0.101, 0.617]}
           rotation={[Math.PI, 0, Math.PI]}
         />
