@@ -34,7 +34,7 @@ export default function RootLayout({
         className={`${dM_Mono.variable} ${bowlby_One_SC.variable} antialiased font-mono font-medium text-zinc-800`}
       >
         <main>
-          <Header />
+          {/* <Header /> */}
           {children}
           <Footer />
         </main>
