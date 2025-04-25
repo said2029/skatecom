@@ -50,7 +50,7 @@ const TextAndImage: FC<TextAndImageProps> = ({ slice, index }) => {
           <Heading
             size="lg"
             as="h2"
-            className="font-extrabold text-6xl font-mono"
+            className="font-extrabold text-4xl md:text-6xl font-mono"
           >
             <PrismicText field={slice.primary.title} />
           </Heading>

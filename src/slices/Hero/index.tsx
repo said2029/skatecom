@@ -48,7 +48,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
         <Heading className="text-6xl font-extrabold relative max-w-2xl place-self-start">
           <PrismicText field={slice.primary.heading} />
         </Heading>
-        <div className="flex w-full justify-between">
+        <div className="flex flex-col md:flex-row w-full justify-between">
           <PrismicRichText field={slice.primary.body} />
           <ButtonLink
             size="lg"

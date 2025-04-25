@@ -27,7 +27,7 @@ const TeamGrid: FC<TeamGridProps> = async ({ slice }) => {
         <PrismicText field={slice.primary.heading} />
       </Heading>
 
-      <div className="grid grid-cols-4 gap-8 mt-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mt-8">
         {skaters.map((item, index) => (
           <React.Fragment key={index}>
             <Skater skater={item} index={index} />
