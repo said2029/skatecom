@@ -38,6 +38,7 @@ export function Skateboard({
   wheelTextureURL,
   wheelTextureURLs,
   constantWheelSpin = false,
+  pose="upright"
 }: SkateboardProps) {
   const { nodes } = useGLTF("/skateboard.gltf") as unknown as GLTFResult;
 
@@ -171,10 +172,21 @@ export function Skateboard({
       });
       // gsap
     }
-  }, [constantWheelSpin,wheelTextureURL]);
+  }, [constantWheelSpin, wheelTextureURL]);
+
+  const position = useMemo(() => ({
+    upright: {
+      position: [0, 0, 0],
+      rotation: [0, 0, 0],
+    },
+    side: {
+      position: [0, 0.295, 0],
+      rotation: [0, 0, Math.PI / 2],
+    },
+  }) as const,[]);
 
   return (
-    <group dispose={null}>
+    <group rotation={position[pose].rotation} position={position[pose].position} dispose={null}>
       <group name="Scene">
         <mesh
           name="GripTape"
